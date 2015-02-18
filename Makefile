@@ -8,10 +8,10 @@ VERSION = 0.2-git
 all: build install test
 
 build:
-	$(PYTHON) setup_addons.py build
+	$(PYTHON) setup.py build
 
 install:
-	$(PYTHON) setup_addons.py install
+	$(PYTHON) setup.py install
 
 clean:
 	$(PYTHON) setup.py clean
@@ -25,6 +25,9 @@ test-code: inplace
 test-doc:
 	$(NOSETESTS) -s --with-doctest --doctest-tests --doctest-extension=rst \
 	--doctest-extension=inc --doctest-fixtures=_fixture doc/ doc/modules/
+
+test-figures:
+	$(NOSETESTS) astroML_fig_tests
 
 test-coverage:
 	rm -rf coverage .coverage

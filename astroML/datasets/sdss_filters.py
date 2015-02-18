@@ -1,13 +1,15 @@
+from __future__ import print_function, division
+
 import os
-import urllib2
 
 import numpy as np
 
 from astroML.datasets import get_data_home
+from ..py3k_compat import urlopen
 
 # Info on vega spectrum: http://www.stsci.edu/hst/observatory/cdbs/calspec.html
-VEGA_URL = 'ftp://ftp.stsci.edu/cdbs/current_calspec/ascii_files/1732526_nic_002.ascii'
-FILTER_URL = 'http://www.sdss.org/dr7/instruments/imager/filters/%s.dat'
+VEGA_URL = 'http://www.astro.washington.edu/users/ivezic/DMbook/data/1732526_nic_002.ascii'
+FILTER_URL = 'http://classic.sdss.org/dr7/instruments/imager/filters/%s.dat'
 
 
 def fetch_sdss_filter(fname, data_home=None, download_if_missing=True):
@@ -50,9 +52,9 @@ def fetch_sdss_filter(fname, data_home=None, download_if_missing=True):
             raise IOError('data not present on disk. '
                           'set download_if_missing=True to download')
 
-        print "downloading from %s" % url
-        F = urllib2.urlopen(url)
-        open(archive_file, 'w').write(F.read())
+        print("downloading from %s" % url)
+        F = urlopen(url)
+        open(archive_file, 'wb').write(F.read())
 
     F = open(archive_file)
 
@@ -91,10 +93,10 @@ def fetch_vega_spectrum(data_home=None, download_if_missing=True):
             raise IOError('data not present on disk. '
                           'set download_if_missing=True to download')
 
-        print "downnloading from %s" % VEGA_URL
-        F = urllib2.urlopen(VEGA_URL)
-        open(archive_name, 'w').write(F.read())
+        print("downnloading from %s" % VEGA_URL)
+        F = urlopen(VEGA_URL)
+        open(archive_name, 'wb').write(F.read())
 
-    F = open(archive_name)
+    F = open(archive_name, 'r')
 
     return np.loadtxt(F, unpack=True)

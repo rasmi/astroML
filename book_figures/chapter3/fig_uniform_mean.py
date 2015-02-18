@@ -43,6 +43,8 @@ setup_text_plots(fontsize=8, usetex=True)
 
 #------------------------------------------------------------
 # Generate the random distribution
+np.random.seed(0)
+
 N = (10 ** np.linspace(2, 4, 1000)).astype(int)
 mu = 0
 W = 2
@@ -53,7 +55,7 @@ rng = uniform(mu - 0.5 * W, W)  # uniform distribution between mu-W and mu+W
 mu_estimate_mean = np.zeros(N.shape)
 mu_estimate_minmax = np.zeros(N.shape)
 
-for i in xrange(len(N)):
+for i in range(len(N)):
     x = rng.rvs(N[i])  # generate N[i] uniformly distributed values
     mu_estimate_mean[i] = np.mean(x)
     mu_estimate_minmax[i] = 0.5 * (np.min(x) + np.max(x))

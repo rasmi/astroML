@@ -1,8 +1,19 @@
 .. -*- mode: rst -*-
 
-============================================
-AstroML: Machine Learning code for Astronomy
-============================================
+=======================================
+AstroML: Machine Learning for Astronomy
+=======================================
+
+.. image:: http://img.shields.io/badge/arXiv-1411.5039-orange.svg?style=flat
+        :target: http://arxiv.org/abs/1411.5039
+.. image:: http://img.shields.io/travis/astroML/astroML/master.svg?style=flat
+        :target: https://travis-ci.org/astroML/astroML/
+.. image:: http://img.shields.io/pypi/v/astroML.svg?style=flat
+        :target: https://pypi.python.org/pypi/astroML
+.. image:: http://img.shields.io/pypi/dm/astroML.svg?style=flat
+        :target: https://pypi.python.org/pypi/astroML
+.. image:: http://img.shields.io/badge/license-BSD-blue.svg?style=flat
+        :target: https://github.com/astroml/astroml/blob/master/LICENSE
 
 AstroML is a Python module for machine learning and data mining
 built on numpy, scipy, scikit-learn, and matplotlib,
@@ -95,8 +106,7 @@ Core Dependencies
 -----------------
 The core ``astroML`` package requires the following:
 
-- Python_ version 2.6.x - 2.7.x
-  (astroML does not yet support python 3.x)
+- Python_ version 2.6-2.7 and 3.3+
 - Numpy_ >= 1.4
 - Scipy_ >= 0.7
 - Scikit-learn_ >= 0.10
@@ -188,15 +198,15 @@ Currently, the policy is that any efficient algorithm included in
 ``astroML``, with code that selects the faster routine if it's available.
 (For an example of how this works, see the definition of the ``lomb_scargle``
 function in ``astroML/periodogram.py``).
-This policy exists for two reasons:
+This policy exists for a few reasons:
 
- 1. it allows novice users to have all the functionality of ``astroML`` without
-    requiring the headache of complicated installation steps.
- 2. it serves a didactic purpose: python-only implementations are often easier
-    to read and understand than equivalent implementations in C or cython.
- 3. it enforces the good coding practice of avoiding premature optimization.
-    First make sure the code works (i.e. write it in simple python).  Then
-    create an optimized version in the addons.
+1. it allows novice users to have all the functionality of ``astroML`` without
+   requiring the headache of complicated installation steps.
+2. it serves a didactic purpose: python-only implementations are often easier
+   to read and understand than equivalent implementations in C or cython.
+3. it enforces the good coding practice of avoiding premature optimization.
+   First make sure the code works (i.e. write it in simple python).  Then
+   create an optimized version in the addons.
 
 If this policy proves especially burdensome in the future, it may be revisited.
 

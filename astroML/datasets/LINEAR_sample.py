@@ -1,11 +1,11 @@
 import os
-from cStringIO import StringIO
+from ..py3k_compat import BytesIO
 import tarfile
 
 import numpy as np
 
 from . import get_data_home
-from tools import download_with_progress_bar
+from .tools import download_with_progress_bar
 
 TARGETLIST_URL = ("http://www.astro.washington.edu/users/ivezic/"
                   "linear/allDataFinal/allLINEARfinal_targets.dat")
@@ -57,7 +57,7 @@ class LINEARdata(object):
         self.targets.dtype.names = target_names
 
         self.dataF = tarfile.open(data_file)
-        self.ids = np.array(map(self._name_to_id, self.dataF.getnames()))
+        self.ids = np.array(list(map(self._name_to_id, self.dataF.getnames())))
 
         # rearrange targets so lists are in the same order
         self.targets = self.targets[self.targets['objectID'].argsort()]
@@ -198,7 +198,7 @@ def fetch_LINEAR_geneva(data_home=None, download_if_missing=True):
                           'set download_if_missing=True to download')
 
         databuffer = download_with_progress_bar(GENEVA_URL)
-        data = np.loadtxt(StringIO(databuffer), dtype=ARCHIVE_DTYPE)
+        data = np.loadtxt(BytesIO(databuffer), dtype=ARCHIVE_DTYPE)
         np.save(archive_file, data)
     else:
         data = np.load(archive_file)

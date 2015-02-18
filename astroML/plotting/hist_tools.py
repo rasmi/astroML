@@ -1,7 +1,6 @@
 import warnings
 
 import numpy as np
-from matplotlib import pyplot as plt
 
 from astroML.density_estimation import\
     scotts_bin_width, freedman_bin_width,\
@@ -49,6 +48,8 @@ def hist(x, bins=10, range=None, *args, **kwargs):
         ax = kwargs['ax']
         del kwargs['ax']
     else:
+        # import here so that testing with Agg will work
+        from matplotlib import pyplot as plt
         ax = plt.gca()
 
     # if range is specified, we need to truncate the data for
@@ -62,7 +63,7 @@ def hist(x, bins=10, range=None, *args, **kwargs):
     if bins in ['blocks']:
         bins = bayesian_blocks(x)
     elif bins in ['knuth', 'knuths']:
-        dx, bins = knuth_bin_width(x, True)
+        dx, bins = knuth_bin_width(x, True, disp=False)
     elif bins in ['scott', 'scotts']:
         dx, bins = scotts_bin_width(x, True)
     elif bins in ['freedman', 'freedmans']:
